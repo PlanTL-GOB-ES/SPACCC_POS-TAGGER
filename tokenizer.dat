@@ -1,0 +1,296 @@
+
+## macros to be used in RegExps rules
+<Macros>
+ALPHA	   [[:alpha:]]
+ALPHANUM   [[:alnum:]ºª°]
+INDEPENDENTS [=:\*]
+SYMNUM     [\.,_/\\\-\+'ºª°&$€£¢¥#%]
+SYMNUM2    [_\\\-\+'ºª°&$€£¢¥#%]
+SYMNUM3    [\.,_\\\-\+'ºª°&$€£¢¥#%]
+SPACE      [[:blank:]]
+OTHERS     .
+</Macros>
+
+## Tokenization rules. They are applied in the order of definition.
+## The first matching the *beginning* of the line is applied
+## and a token built. The process is repeated until the line 
+## has been completely processed.
+##    -The first field in the rule is the rule name. If it starts
+##     with a "*", the RegExp will only produce a token if the 
+##     match is found in abbreviation list <Abbreviations> below.
+##    -The second field in the rule is the substring to form the token/s with
+##     It may be 0 (the match of the whole expression) or any number
+##     from 1 to the number of substrings (up to 9). A token will be
+##     created for each substring from 1 to the specified value.
+##    -The third field is the regexp to match against the line
+## 
+## AÑADIDA REGLA "DEGREES" para reconocer los ordinales y los grados centígrados
+## AÑADIDA REGLA "NUMBERS" para reconocer los numeros y separarlos de las medidas
+## AÑADIDA REGLA "ELEMENTS" para reconocer isótopos: expresiones tipo "Ca(2+)"
+## 
+<RegExps>
+HOURS           1   ([0-9][0-9]?:[0-9][0-9](:[0-9][0-9])?)[^0-9]
+INDEPENDENT_SYMBOLS 0 {INDEPENDENTS}
+INITIALS1       1  ([A-Z](\.[A-Z])+)(\.\.\.)
+INITIALS2 	0  ([A-Z]\.)+
+DEGREES         1  ([+-]?[0-9]+(?:{SYMNUM}[0-9]+)*)(º{SPACE}?C)
+DATES		0  [0-9][0-9]?[\-/][[:alnum:]]+[\-/][0-9][0-9][0-9][0-9]
+MAILS           0  {ALPHANUM}+([\._]{ALPHANUM}+)*@{ALPHANUM}+([\._]{ALPHANUM}+)*
+NUMBERS         0  [+-]?[0-9]+(({SYMNUM}|x)[0-9]+)*{SYMNUM2}?
+ELEMENTS        0  [A-Z][a-z]?\([0-9]+[\+\-]\)
+NAMES_CODES1	0  ({ALPHA}|{SYMNUM2})*[0-9]({ALPHA}|[0-9]|{SYMNUM3}+{ALPHANUM})*{SYMNUM2}?
+NAMES_CODES2	0  ({ALPHA}|{SYMNUM3})*[0-9]({ALPHA}|[0-9]|{SYMNUM3}+{ALPHANUM})*{SYMNUM2}?
+THREE_DOTS 	0  (\.\.\.)
+QUOTES	        0  (``|<<|>>|'')
+URLS1  	        0  ((mailto:|(news|http|https|ftp|ftps)://)[\w\.\-]+|^(www(\.[\w\-]+)+))[/\w\.\-]*
+KEEP_COMPOUNDS  0  {ALPHA}+(['_\-\+]{ALPHA}+)+
+*ABREVIATIONS1  0  (({ALPHA}+\.)+)(?!\.\.)
+WORD            0  {ALPHANUM}+[\+]*
+OTHERS_C        0  {OTHERS}
+</RegExps>
+
+## Abbreviations.  The dot is not tokenized separately
+## in the cases listed below.
+<Abbreviations>
+aa.rr.
+abr.
+abrev.
+ac.
+adj.
+adm.
+admón.
+afma.
+afmas.
+afmo.
+afmos.
+ag.
+ago.
+a.i.n.e.
+a.l.t.
+a.m.
+a.p.
+ap.
+apdo.
+art.
+arts.
+arz.
+arzbpo.
+assn.
+a.s.t.
+atte.
+av.
+avda.
+b.a.m.
+bros.
+bv.
+cap.
+caps.
+c.c.
+cg.
+cgo.
+cia.
+cía.
+cit.
+co.
+col.
+comp.
+corp.
+cos.
+cta.
+cte.
+ctra.
+cts.
+d.c.
+dcha.
+dcho.
+dept.
+depto.
+dic.
+doc.
+docs.
+dpt.
+dpto.
+dr.
+dra.
+dras.
+dres.
+dto.
+dupdo.
+ed.
+ee.uu.
+ej.
+emma.
+emmas.
+emmo.
+emmos.
+ene.
+entlo.
+entpo.
+esp.
+etc.
+e.v.
+ex.
+excm.
+excma.
+excmas.
+excmo.
+excmos.
+fasc.
+f.c.
+f.c.f.
+fdo.
+feb.
+fig.
+figs.
+f.m.
+fol.
+f.r.
+fra.
+gb.
+gral.
+hnos.
+hros.
+h.v.p.d.
+ib.
+ibid.
+ibíd.
+id.
+íd.
+ilm.
+ilma.
+ilmas.
+ilmo.
+ilmos.
+iltre.
+i.m.c.
+inc.
+i.n.r.
+intr.
+ít.
+i.v
+i.v.
+izq.
+izqda.
+izqdo.
+jr.
+jul.
+jun.
+lám.
+lat.
+lda.
+ldo.
+lib.
+lim.
+loc.
+ltd.
+ltda.
+ltdo.
+mar.
+máx.
+may.
+mín.
+mons.
+mr.
+mrs.
+mss.
+mtro.
+nov.
+ntra.
+ntro.
+núm.
+n.v.
+ob.
+obpo.
+o.d.
+o.i.
+op.
+p.a.
+p.a.a.f.
+pág.
+págs.
+paq.
+párr.
+p.c.r.
+pd.
+ph.
+pje.
+pl.
+plc.
+pm.
+pp.
+ppal.
+pral.
+prof.
+pról.
+prov.
+ps.
+pta.
+ptas.
+pte.
+pts.
+pza.
+rda.
+rdo.
+ref.
+reg.
+rel.
+rev.
+revda.
+revdo.
+r.i.
+rma.
+rmo.
+r.n.
+r.p.m.
+rte.
+r.t.u.
+s.a.
+s.c.
+sdad.
+sec.
+secret.
+sep.
+sig.
+smo.
+spp.
+sr.
+sra.
+sras.
+sres.
+srs.
+srta.
+ss.mm.
+sta.
+sto.
+sust.
+t.a.c.
+t.c.
+tech.
+tel.
+teléf.
+telf.
+ten.
+tfono.
+tít.
+tlf.
+t.p.
+tts
+ud.
+uds.
+u.i.
+u.i.v.
+u.s.a.
+v.a.c.
+vda.
+vdo.
+vid.
+v.n.
+v.o
+v.o.
+vol.
+vols.
+v.r.
+vra.
+vro.
+vta.
+</Abbreviations>
