@@ -1,53 +1,43 @@
-# SPACCC_POS-TAGGER: Spanish Clinical Case Corpus Part-of-Specch Tagger
+# Python wrapper for the CNIO Medical POS Tagger
 
 ## Introduction
 
-This repository contains the Part-of-Speech Tagger for medical terms in Spanish based on FreeLing3.1.
-It also contains the Python wrapper for this software, aiming at easier use.
+This software is a wrapper around the modified FreeLing 3.1 tagger for medical terms in Spanish.
+
 
 ## Prerequisites
 
-To use the adapted FreeLing 3.1 to the medical domain, the following resources are required:
-* Docker (https://www.docker.com/))
-* To have all the resources included in this directory (use git clone)
-* To compile the docker container (steps detailed below)
-* Be able to run docker as a non-root user (https://docs.docker.com/install/linux/linux-postinstall/)
+To utilize this wrapper, one has to download and compile the adapted FreeLing3.1 in Spanish for the medical domain.
+Instructions can be found in the parent folder
+
 
 ## Directory structure
 
-* `compila_freeling.sh`:  compiles the adapted FreeLing3.1 docker image
-* `config.cfg`: FreeLing configuration file
-* `Dockerfile`: Dockerfile for image compilation
-* `llamada_freeling.sh`: Script to execute the analysis of a text with the adapted FreeLing 
+* `CNIO_Tagger`:  source for the CNIO Tagger wrapper
+* `setup.py`: Python setup configuration files
 * `README.md`: This file
-* `singlewords.dat`: File with the normalized resources (words, acronyms, and abbreviations)
-* `splitter.dat`: Sentence segmentantion rules
-* `tokenizer.dat`: Tokenization rules
-* `usermap.dat`: Rules for POS assignment (regular expressions)
-* `CNIO_Tagger`: Folder containing the Python wrapper for this tool
+* `Example.ipynb`: Jupyter Notebook with usage example
 
-## Usage
+## Install
 
-To compile the adapted FreeLing3.1 docker image, the following command (from this directory) has to be executed:
+Clone this folder to your computer an run: `python setup.py install`
 
-```bash
-$> bash compila_freeling.sh
-```
-The result will be the docker image  `freeling-cnio:1.0.0`
 
 ## Examples
 
 To execute the program, given a text, one can use the following command:
-```bash
-$> echo 'Este es un texto de prueba.' | bash llamada_freeling.sh
+```python
+from CNIO_Tagger import CNIO_Tagger
+tag = CNIO_Tagger() # Starts a docker image in background
+results = tag.parse('Este es un texto de prueba.')
+
+# To kill the docker image
+del(tag)
 ```
-
-## Python wrapper
-
-Check the `CNIO_Tagger` folder inside this directory
 
 ## Contact
 
+Felipe Soares (felipe.soares@bsc.es)
 
 ## License
 
