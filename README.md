@@ -48,6 +48,7 @@ Check the `CNIO_Tagger` folder inside this directory
 
 ## Contact
 
+Felipe Soares (felipe.soares@bsc.es)
 
 ## License
 
