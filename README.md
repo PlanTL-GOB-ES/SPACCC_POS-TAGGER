@@ -52,4 +52,6 @@ Felipe Soares (felipe.soares@bsc.es)
 
 ## License
 
-FreeLing is licensed under Affero GPL (http://www.gnu.org/licenses/agpl.html). The modules or linguistic data that have been developed in this project are licensed undet MIT (https://opensource.org/licenses/MIT).
+FreeLing is licensed under Affero GPL (http://www.gnu.org/licenses/agpl.html). 
+
+The modules or linguistic data that have been developed in this project are licensed undet MIT (https://opensource.org/licenses/MIT).
