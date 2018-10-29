@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository contains the Part-of-Speech Tagger for medical terms in Spanish based on FreeLing3.1.
+This repository contains the Part-of-Speech Tagger for medical domain corpus in Spanish based on FreeLing3.1.
 It also contains the Python wrapper for this software, aiming at easier use.
 
 ## Prerequisites
