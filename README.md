@@ -7,8 +7,8 @@ It also contains the Python wrapper for this software, aiming at easier use.
 
 ## Prerequisites
 
-To use the adapted FreeLing 3.1 to the medical domain, the following resources are required:
-* Docker (https://www.docker.com/))
+To use the SPACCC_POS-TAGGER, the following resources are required:
+* Docker (https://www.docker.com/)
 * To have all the resources included in this directory (use git clone)
 * To compile the docker container (steps detailed below)
 * Be able to run docker as a non-root user (https://docs.docker.com/install/linux/linux-postinstall/)
