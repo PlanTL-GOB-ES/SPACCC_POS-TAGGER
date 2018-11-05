@@ -1,0 +1,7 @@
+CNIO_Tagger.py
+README.md
+setup.py
+CNIO_Tagger.egg-info/PKG-INFO
+CNIO_Tagger.egg-info/SOURCES.txt
+CNIO_Tagger.egg-info/dependency_links.txt
+CNIO_Tagger.egg-info/top_level.txt
