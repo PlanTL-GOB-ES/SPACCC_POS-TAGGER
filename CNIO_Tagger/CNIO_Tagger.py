@@ -4,13 +4,6 @@ import subprocess
 from threading import Thread
 from time import sleep
 from queue import Queue, Empty
-import os
-import unicodedata
-
-
-def elimina_tildes(cadena):
-    s = ''.join((c for c in unicodedata.normalize('NFD', cadena) if unicodedata.category(c) != 'Mn'))
-    return s
 
 
 class NonBlockingStreamReader:
@@ -41,7 +34,6 @@ class NonBlockingStreamReader:
         self._t.daemon = True
         self._t.start()  # start collecting lines from the stream
 
-
     def readline(self, timeout=None):
         try:
             return self._q.get(block=timeout is not None,
@@ -51,7 +43,6 @@ class NonBlockingStreamReader:
 
 
 class UnexpectedEndOfStream(Exception): pass
-
 
 
 class CNIO_Tagger(object):
@@ -70,7 +61,6 @@ class CNIO_Tagger(object):
 
         self._nbsr = NonBlockingStreamReader(self._tagger.stdout)
         sleep(1)
-
 
     def get_results(self, text):
         """
@@ -95,7 +85,6 @@ class CNIO_Tagger(object):
             results.append(tuple(output.decode('utf-8').split(' ')))
 
         return results
-
 
     def parse(self, text):
         """
@@ -123,87 +112,6 @@ class CNIO_Tagger(object):
             return sentences[0]
         else:
             return sentences
-
-
-    def write_brat(self, parsed, folder_path):
-        """
-        Function to write the parsed string into BRAT format file
-        Input:
-            - parsed: Result from parse method
-            - folder_path: Complete path to the file to be saved
-        :return:
-        """
-
-
-        def convertirTexto(parsed, folder_path):
-            ini = 0
-            fin = 0
-            idT = 0
-
-            if any(isinstance(el, list) for el in parsed):
-                f = open(folder_path, "w")
-
-                # cogemos los distintos componentes de las lineas de freeling (forma, lema, etiqueta, porcentaje(despreciable))
-
-                for item in parsed:
-                    for i, s in enumerate(item):
-                        item[i]= (elimina_tildes(item[i][0]), elimina_tildes(item[i][1]), elimina_tildes(item[i][2]))
-
-                    for t in item:
-                        forma = t[0]
-                        lema = t[1]
-                        etiqueta = t[2]
-                        etiquetaSimple = etiqueta if (etiqueta[0] == 'F' or etiqueta[0] == 'Z') else etiqueta[:2]
-
-                        # calculamos el inicio y el final de la forma en el texto
-                        ini = fin
-                        fin = ini + len(forma)
-                        idT += 1
-
-                        # escribimos una linea para etiquetar la palabra en brat (Tx    etiquetaSimple inicio fin    forma)
-                        f.write("T" + str(idT) + "\t" + etiquetaSimple + " " + str(ini) + " " + str(fin) + "\t" +
-                                forma + "\n")
-
-                        # escribimos una linea para los comentarios de la palabra (#x    Norm Tx    lema etiqueta)
-                        f.write(
-                            "#" + str(idT) + "\t" + "Norm " + "T" + str(idT) + "\t" + lema + " " + etiqueta + "\n")
-
-                        fin += 1
-
-                f.close()
-
-            else:
-                f = open(folder_path, "w")
-
-                for t in parsed:
-                    t = (elimina_tildes(t[0]), elimina_tildes(t[1]), elimina_tildes(t[2]))
-
-                    forma = t[0]
-                    lema = t[1]
-                    etiqueta = t[2]
-                    etiquetaSimple = etiqueta if (etiqueta[0] == 'F' or etiqueta[0] == 'Z') else etiqueta[:2]
-
-                    # calculamos el inicio y el final de la forma en el texto
-                    ini = fin
-                    fin = ini + len(forma)
-                    idT += 1
-
-                    # escribimos una linea para etiquetar la palabra en brat (Tx    etiquetaSimple inicio fin    forma)
-                    f.write("T" + str(idT) + "\t" + etiquetaSimple + " " + str(ini) + " " + str(fin) + "\t" +
-                            forma + "\n")
-
-                    # escribimos una linea para los comentarios de la palabra (#x    Norm Tx    lema etiqueta)
-                    f.write(
-                        "#" + str(idT) + "\t" + "Norm " + "T" + str(idT) + "\t" + lema + " " + etiqueta + "\n")
-
-                    fin += 1
-
-                f.close()
-
-
-        convertirTexto(parsed, folder_path)
-
-
 
     def __del__(self):
         """
