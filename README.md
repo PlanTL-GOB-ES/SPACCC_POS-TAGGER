@@ -5,6 +5,19 @@
 This repository contains the Part-of-Speech Tagger for medical domain corpus in Spanish based on FreeLing3.1.
 It also contains the Python wrapper for this software, aiming at easier use.
 
+## Demo
+
+Here you can find a demonstration of the Part-of-Speech Tagger: http://cli.re/GdaPVb
+
+## Performance
+
+| Gold standard vs Tagger |   ACC  |
+| ----------------------  | ------ |
+| Splitting               | 98,85% |
+| Tokenization            | 99,47% |
+| Part-of_Speech          | 99,87% |
+
+
 ## Prerequisites
 
 To use the SPACCC_POS-TAGGER, the following resources are required:
