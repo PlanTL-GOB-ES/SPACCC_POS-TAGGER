@@ -5,6 +5,12 @@
 This repository contains the Part-of-Speech Tagger for medical domain corpus in Spanish based on FreeLing3.1.
 It also contains the Python wrapper for this software, aiming at easier use.
 
+
+##  Digital Object Identifier (DOI)
+
+https://doi.org/10.5281/zenodo.1492605
+
+
 ## Demo
 
 Here you can find a demonstration of the Part-of-Speech Tagger: http://cli.re/GdaPVb
