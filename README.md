@@ -15,7 +15,7 @@ Here you can find a demonstration of the Part-of-Speech Tagger: http://cli.re/Gd
 | ----------------------  | ------ |
 | Splitting               | 98,85% |
 | Tokenization            | 99,47% |
-| Part-of_Speech          | 99,87% |
+| Part-of-Speech          | 99,87% |
 
 
 ## Prerequisites
