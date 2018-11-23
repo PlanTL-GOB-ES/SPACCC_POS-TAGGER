@@ -1,15 +1,14 @@
 # SPACCC_POS-TAGGER: Spanish Clinical Case Corpus Part-of-Specch Tagger
 
-## Introduction
-
-This repository contains the Part-of-Speech Tagger for medical domain corpus in Spanish based on FreeLing3.1.
-It also contains the Python wrapper for this software, aiming at easier use.
-
-
 ##  Digital Object Identifier (DOI)
 
 https://doi.org/10.5281/zenodo.1492605
 
+
+## Introduction
+
+This repository contains the Part-of-Speech Tagger for medical domain corpus in Spanish based on FreeLing3.1.
+It also contains the Python wrapper for this software, aiming at easier use.
 
 ## Demo
 
