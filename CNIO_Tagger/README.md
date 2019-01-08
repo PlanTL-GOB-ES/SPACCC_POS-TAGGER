@@ -1,4 +1,4 @@
-# Python wrapper for the CNIO Medical POS Tagger
+# Python wrapper for the SPACCC_POS-Tagger
 
 ## Introduction
 
