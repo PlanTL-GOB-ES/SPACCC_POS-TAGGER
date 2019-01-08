@@ -1,4 +1,4 @@
-# SPACCC_POS-TAGGER: Spanish Clinical Case Corpus Part-of-Specch Tagger
+# SPACCC_POS-TAGGER: Spanish Clinical Case Corpus Part-of-Speech Tagger
 
 ##  Digital Object Identifier (DOI)
 
