@@ -12,7 +12,7 @@ It also contains the Python wrapper for this software, aiming at easier use.
 
 ## Demo
 
-Here you can find a demonstration of the Part-of-Speech Tagger: http://cli.re/GdaPVb
+Here you can find a demonstration of the Part-of-Speech Tagger: http://temu.bsc.es/pos/ 
 
 
 ## Performance
