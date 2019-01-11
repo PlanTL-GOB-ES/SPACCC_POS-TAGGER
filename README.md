@@ -15,15 +15,6 @@ It also contains the Python wrapper for this software, aiming at easier use.
 Here you can find a demonstration of the Part-of-Speech Tagger: http://temu.bsc.es/pos/ 
 
 
-## Performance
-
-| Gold standard vs Tagger |   ACC  |
-| ----------------------  | ------ |
-| Splitting               | 98,85% |
-| Tokenization            | 99,47% |
-| Part-of-Speech          | 99,87% |
-
-
 ## Prerequisites
 
 To use the SPACCC_POS-TAGGER, the following resources are required:
@@ -61,6 +52,15 @@ To execute the program, given a text, one can use the following command:
 $> echo 'Este es un texto de prueba.' | bash llamada_freeling.sh
 ```
 
+## Performance
+
+| Gold standard vs Tagger |   ACC  |
+| ----------------------  | ------ |
+| Splitting               | 98,85% |
+| Tokenization            | 99,47% |
+| Part-of-Speech          | 99,87% |
+
+
 ## Python wrapper
 
 Check the `CNIO_Tagger` folder inside this directory
@@ -71,6 +71,6 @@ Felipe Soares (felipe.soares@bsc.es)
 
 ## License
 
-FreeLing is licensed under Affero GPL (http://www.gnu.org/licenses/agpl.html). 
+FreeLing is licensed under GPL (https://www.gnu.org/licenses/gpl-3.0.en.html). 
 
 The modules or linguistic data that have been developed in this project are licensed undet MIT (https://opensource.org/licenses/MIT).
