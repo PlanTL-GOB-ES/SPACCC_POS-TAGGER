@@ -1,1 +1,1 @@
-docker build -t freeling-cnio:1.0.0 .
+docker build -t med-tagger:1.0.0 .

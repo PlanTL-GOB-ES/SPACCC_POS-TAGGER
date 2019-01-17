@@ -34,7 +34,7 @@ To use the SPACCC_POS-TAGGER, the following resources are required:
 * `splitter.dat`: Sentence segmentantion rules
 * `tokenizer.dat`: Tokenization rules
 * `usermap.dat`: Rules for POS assignment (regular expressions)
-* `CNIO_Tagger`: Folder containing the Python wrapper for this tool
+* `Med_Tagger`: Folder containing the Python wrapper for this tool
 
 ## Usage
 
@@ -43,7 +43,7 @@ To compile the adapted FreeLing3.1 docker image, the following command (from thi
 ```bash
 $> bash compila_freeling.sh
 ```
-The result will be the docker image  `freeling-cnio:1.0.0`
+The result will be the docker image  `med-tagger:1.0.0`
 
 ## Examples
 
@@ -63,7 +63,7 @@ $> echo 'Este es un texto de prueba.' | bash llamada_freeling.sh
 
 ## Python wrapper
 
-Check the `CNIO_Tagger` folder inside this directory
+Check the `Med_Tagger` folder inside this directory
 
 ## Contact
 
