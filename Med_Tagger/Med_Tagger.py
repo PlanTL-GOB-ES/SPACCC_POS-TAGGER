@@ -124,21 +124,20 @@ class Med_Tagger(object):
         else:
             return sentences
 
+    def write_brat(self, original, parsed, folder_path):
+           """
+           Function to write the parsed string into BRAT format file
+             Input:
+                - original: the original string
+                - parsed: Result from parse method
+                - folder_path: Complete path to the file to be saved
+             :return:
+             """
 
-    def write_brat(self, parsed, folder_path):
-        """
-        Function to write the parsed string into BRAT format file
-        Input:
-            - parsed: Result from parse method
-            - folder_path: Complete path to the file to be saved
-        :return:
-        """
-
-
-        def convertirTexto(parsed, folder_path):
-            ini = 0
-            fin = 0
-            idT = 0
+        def convert_text(original, parsed, folder_path):
+            start = 0
+            end = 0
+            tag_id = 0
 
             if any(isinstance(el, list) for el in parsed):
                 f = open(folder_path, "w")
@@ -147,7 +146,7 @@ class Med_Tagger(object):
 
                 for item in parsed:
                     for i, s in enumerate(item):
-                        item[i]= (elimina_tildes(item[i][0]), elimina_tildes(item[i][1]), elimina_tildes(item[i][2]))
+                        item[i]= (item[i][0], item[i][1], item[i][2])
 
                     for t in item:
                         forma = t[0]
@@ -155,20 +154,28 @@ class Med_Tagger(object):
                         etiqueta = t[2]
                         etiquetaSimple = etiqueta if (etiqueta[0] == 'F' or etiqueta[0] == 'Z') else etiqueta[:2]
 
-                        # calculamos el inicio y el final de la forma en el texto
-                        ini = fin
-                        fin = ini + len(forma)
-                        idT += 1
+                        start = original.find(forma, end)
 
-                        # escribimos una linea para etiquetar la palabra en brat (Tx    etiquetaSimple inicio fin    forma)
-                        f.write("T" + str(idT) + "\t" + etiquetaSimple + " " + str(ini) + " " + str(fin) + "\t" +
-                                forma + "\n")
+                        if start == -1:
+                            form_trimmed = forma.split('_')[0]
+                            if form_trimmed:
+                                start = original.find(form_trimmed, end)
+                            else:
+                                start = end + 1
+                        end = start + len(forma)
 
-                        # escribimos una linea para los comentarios de la palabra (#x    Norm Tx    lema etiqueta)
+                        control = forma.split('_')
+                        if len(control) > 1:
+                            if control[1] == '.':
+                                end = start + len(forma) - 1
+                        tag_id += 1
+
+                        f.write("T" + str(tag_id) + "\t" + etiquetaSimple + " " + str(start) + " " + str(end) + "\t" +
+                                original[start:end] + "\n")
+
                         f.write(
-                            "#" + str(idT) + "\t" + "Norm " + "T" + str(idT) + "\t" + lema + " " + etiqueta + "\n")
+                            "#" + str(tag_id) + "\t" + "Norm " + "T" + str(tag_id) + "\t" + lema + " " + etiqueta + "\n")
 
-                        fin += 1
 
                 f.close()
 
@@ -176,32 +183,117 @@ class Med_Tagger(object):
                 f = open(folder_path, "w")
 
                 for t in parsed:
-                    t = (elimina_tildes(t[0]), elimina_tildes(t[1]), elimina_tildes(t[2]))
+                    t = (t[0], t[1], t[2])
 
                     forma = t[0]
                     lema = t[1]
                     etiqueta = t[2]
                     etiquetaSimple = etiqueta if (etiqueta[0] == 'F' or etiqueta[0] == 'Z') else etiqueta[:2]
 
-                    # calculamos el inicio y el final de la forma en el texto
-                    ini = fin
-                    fin = ini + len(forma)
-                    idT += 1
+                    start = original.find(forma, end)
 
-                    # escribimos una linea para etiquetar la palabra en brat (Tx    etiquetaSimple inicio fin    forma)
-                    f.write("T" + str(idT) + "\t" + etiquetaSimple + " " + str(ini) + " " + str(fin) + "\t" +
-                            forma + "\n")
+                    if start == -1:
+                        form_trimmed = forma.split('_')[0]
+                        if form_trimmed:
+                            start = original.find(form_trimmed, end)
+                        else:
+                            start = end + 1
+                    end = start + len(forma)
 
-                    # escribimos una linea para los comentarios de la palabra (#x    Norm Tx    lema etiqueta)
+                    control = forma.split('_')
+                    if len(control) > 1:
+                        if control[1] == '.':
+                            end = start + len(forma) - 1
+                    tag_id += 1
+
+                    f.write("T" + str(tag_id) + "\t" + etiquetaSimple + " " + str(start) + " " + str(end) + "\t" +
+                            original[start:end] + "\n")
+
                     f.write(
-                        "#" + str(idT) + "\t" + "Norm " + "T" + str(idT) + "\t" + lema + " " + etiqueta + "\n")
-
-                    fin += 1
+                        "#" + str(tag_id) + "\t" + "Norm " + "T" + str(tag_id) + "\t" + lema + " " + etiqueta + "\n")
 
                 f.close()
+        print('blabla')
+        convert_text(original, parsed, folder_path)
 
 
-        convertirTexto(parsed, folder_path)
+    # def write_brat(self, parsed, folder_path):
+    #     """
+    #     Function to write the parsed string into BRAT format file
+    #     Input:
+    #         - parsed: Result from parse method
+    #         - folder_path: Complete path to the file to be saved
+    #     :return:
+    #     """
+    #
+    #
+    #     def convertirTexto(parsed, folder_path):
+    #         ini = 0
+    #         fin = 0
+    #         idT = 0
+    #
+    #         if any(isinstance(el, list) for el in parsed):
+    #             f = open(folder_path, "w")
+    #
+    #             # cogemos los distintos componentes de las lineas de freeling (forma, lema, etiqueta, porcentaje(despreciable))
+    #
+    #             for item in parsed:
+    #                 for i, s in enumerate(item):
+    #                     item[i]= (elimina_tildes(item[i][0]), elimina_tildes(item[i][1]), elimina_tildes(item[i][2]))
+    #
+    #                 for t in item:
+    #                     forma = t[0]
+    #                     lema = t[1]
+    #                     etiqueta = t[2]
+    #                     etiquetaSimple = etiqueta if (etiqueta[0] == 'F' or etiqueta[0] == 'Z') else etiqueta[:2]
+    #
+    #                     # calculamos el inicio y el final de la forma en el texto
+    #                     ini = fin
+    #                     fin = ini + len(forma)
+    #                     idT += 1
+    #
+    #                     # escribimos una linea para etiquetar la palabra en brat (Tx    etiquetaSimple inicio fin    forma)
+    #                     f.write("T" + str(idT) + "\t" + etiquetaSimple + " " + str(ini) + " " + str(fin) + "\t" +
+    #                             forma + "\n")
+    #
+    #                     # escribimos una linea para los comentarios de la palabra (#x    Norm Tx    lema etiqueta)
+    #                     f.write(
+    #                         "#" + str(idT) + "\t" + "Norm " + "T" + str(idT) + "\t" + lema + " " + etiqueta + "\n")
+    #
+    #                     fin += 1
+    #
+    #             f.close()
+    #
+    #         else:
+    #             f = open(folder_path, "w")
+    #
+    #             for t in parsed:
+    #                 t = (elimina_tildes(t[0]), elimina_tildes(t[1]), elimina_tildes(t[2]))
+    #
+    #                 forma = t[0]
+    #                 lema = t[1]
+    #                 etiqueta = t[2]
+    #                 etiquetaSimple = etiqueta if (etiqueta[0] == 'F' or etiqueta[0] == 'Z') else etiqueta[:2]
+    #
+    #                 # calculamos el inicio y el final de la forma en el texto
+    #                 ini = fin
+    #                 fin = ini + len(forma)
+    #                 idT += 1
+    #
+    #                 # escribimos una linea para etiquetar la palabra en brat (Tx    etiquetaSimple inicio fin    forma)
+    #                 f.write("T" + str(idT) + "\t" + etiquetaSimple + " " + str(ini) + " " + str(fin) + "\t" +
+    #                         forma + "\n")
+    #
+    #                 # escribimos una linea para los comentarios de la palabra (#x    Norm Tx    lema etiqueta)
+    #                 f.write(
+    #                     "#" + str(idT) + "\t" + "Norm " + "T" + str(idT) + "\t" + lema + " " + etiqueta + "\n")
+    #
+    #                 fin += 1
+    #
+    #             f.close()
+    #
+    #
+    #     convertirTexto(parsed, folder_path)
 
 
 
