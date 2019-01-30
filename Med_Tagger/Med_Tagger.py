@@ -125,14 +125,14 @@ class Med_Tagger(object):
             return sentences
 
     def write_brat(self, original, parsed, folder_path):
-           """
-           Function to write the parsed string into BRAT format file
-             Input:
+        """
+        Function to write the parsed string into BRAT format file
+            Input:
                 - original: the original string
                 - parsed: Result from parse method
                 - folder_path: Complete path to the file to be saved
              :return:
-             """
+        """
 
         def convert_text(original, parsed, folder_path):
             start = 0
@@ -213,7 +213,7 @@ class Med_Tagger(object):
                         "#" + str(tag_id) + "\t" + "Norm " + "T" + str(tag_id) + "\t" + lema + " " + etiqueta + "\n")
 
                 f.close()
-        print('blabla')
+        #print('blabla')
         convert_text(original, parsed, folder_path)
 
 
