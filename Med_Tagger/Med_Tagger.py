@@ -87,12 +87,17 @@ class Med_Tagger(object):
         self._tagger.stdin.flush()
 
         results = []
-        while True:
-            output = self._nbsr.readline(0.1)
-            # 0.1 secs to let the shell output the result
-            if not output:
-                break
-            results.append(tuple(output.decode('utf-8').split(' ')))
+        stop_it = 0
+        while True:        
+                while True:
+                    output = self._nbsr.readline(0.1)
+                    # 0.1 secs to let the shell output the result
+                    if not output:
+                        stop_it = stop_it + 1
+                        break
+                    results.append(tuple(output.decode('utf-8').split(' ')))
+                if len(results) > 0 or stop_it > 3:
+                        break
 
         return results
 
