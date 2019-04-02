@@ -72,5 +72,3 @@ Felipe Soares (felipe.soares@bsc.es)
 ## License
 
 FreeLing is licensed under GPL (https://www.gnu.org/licenses/gpl-3.0.en.html). 
-
-The modules or linguistic data that have been developed in this project are licensed undet MIT (https://opensource.org/licenses/MIT).
