@@ -50,14 +50,7 @@ $> echo 'Este es un texto de prueba.' | bash llamada_freeling.sh
 This generates an output with four columns: input wordform, lemma, PoS tags and score:
 
 `Esto este PD0NS000 1`
-`es ser VSIP3S0 1`Esto este PD0NS000 1
-es ser VSIP3S0 1
-un uno DI0MS0 0.987295
-texto texto NCMS000 1
-de de SPS00 0.999984
-prueba prueba NCFS000 0.972603
-. . Fp 1
-
+`es ser VSIP3S0 1`
 `un uno DI0MS0 0.987295`
 `texto texto NCMS000 1`
 `de de SPS00 0.999984`
