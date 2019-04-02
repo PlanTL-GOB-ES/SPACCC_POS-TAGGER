@@ -47,7 +47,8 @@ To execute the program, given a text, one can use the following command:
 ```bash
 $> echo 'Este es un texto de prueba.' | bash llamada_freeling.sh
 ```
-This generates an output with four columns: input wordform, lemma, PoS tags and score:
+This generates an output with four columns that includes, for each input word, the input wordform, the lemma, the 
+PoS tag and the score that the tagger assigns to the tag:
 
 <pre>
 Esto este PD0NS000 1
@@ -58,6 +59,7 @@ de de SPS00 0.999984
 prueba prueba NCFS000 0.972603
 . . Fp 1
 </pre>
+
 
 ## Performance
 
