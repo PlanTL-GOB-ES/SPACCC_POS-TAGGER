@@ -1,5 +1,9 @@
 # SPACCC_POS-TAGGER: Spanish Clinical Case Corpus Part-of-Speech Tagger
 
+## Digital Object Identifier (DOI) and access to dataset files
+
+https://doi.org/10.5281/zenodo.2565229
+
 
 ## Introduction
 
